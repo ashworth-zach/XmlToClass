@@ -34,13 +34,29 @@ namespace DynamicXmlCasting
             string path = string.Empty;
             string xmlInputData = string.Empty;
             string xmlOutputData = string.Empty;
+            Random random = new Random();
+            int randomNumber=random.Next(1,3);
 
-            // EXAMPLE 2
-            path = Directory.GetCurrentDirectory() + @".\TestStrings\Customer.xml";
-            xmlInputData = File.ReadAllText(path);
+            switch(randomNumber){
+                case 1:
+                    //customer test
+                    path = Directory.GetCurrentDirectory() + @".\TestStrings\Customer.xml";
+                    xmlInputData = File.ReadAllText(path);
+                    break;
+                case 2:
+                    //person test
+                    xmlInputData = Testing.Tests.personTest;
+                    break;
+                case 3:
+                    //address test
+                    xmlInputData = Testing.Tests.addressTest;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
-            Customer customer2 = ser.Deserialize<Customer>(xmlInputData);
-            xmlOutputData = ser.Serialize<Customer>(customer2);
+            dynamic xmlDeserialized = ser.Deserialize<Customer>(xmlInputData);
+            xmlOutputData = ser.Serialize<Customer>(xmlDeserialized);
             return xmlOutputData;
         }
         

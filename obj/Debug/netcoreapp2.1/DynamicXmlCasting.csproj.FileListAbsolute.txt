@@ -1,0 +1,11 @@
+C:\Scripts\DynamicXmlCasting\bin\Debug\netcoreapp2.1\DynamicXmlCasting.deps.json
+C:\Scripts\DynamicXmlCasting\bin\Debug\netcoreapp2.1\DynamicXmlCasting.runtimeconfig.json
+C:\Scripts\DynamicXmlCasting\bin\Debug\netcoreapp2.1\DynamicXmlCasting.runtimeconfig.dev.json
+C:\Scripts\DynamicXmlCasting\bin\Debug\netcoreapp2.1\DynamicXmlCasting.dll
+C:\Scripts\DynamicXmlCasting\bin\Debug\netcoreapp2.1\DynamicXmlCasting.pdb
+C:\Scripts\DynamicXmlCasting\obj\Debug\netcoreapp2.1\DynamicXmlCasting.csprojAssemblyReference.cache
+C:\Scripts\DynamicXmlCasting\obj\Debug\netcoreapp2.1\DynamicXmlCasting.csproj.CoreCompileInputs.cache
+C:\Scripts\DynamicXmlCasting\obj\Debug\netcoreapp2.1\DynamicXmlCasting.AssemblyInfoInputs.cache
+C:\Scripts\DynamicXmlCasting\obj\Debug\netcoreapp2.1\DynamicXmlCasting.AssemblyInfo.cs
+C:\Scripts\DynamicXmlCasting\obj\Debug\netcoreapp2.1\DynamicXmlCasting.dll
+C:\Scripts\DynamicXmlCasting\obj\Debug\netcoreapp2.1\DynamicXmlCasting.pdb
