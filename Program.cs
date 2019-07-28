@@ -1,8 +1,12 @@
-﻿using System;
+﻿using System.Dynamic;
+using System.Xml.Linq;
+using System.Runtime.Serialization;
+using System;
 using DynamicXmlCasting.Models;
 using System.Collections;
 using System.IO;
 using DynamicXmlCasting.Xml;
+using Newtonsoft.Json;
 
 namespace DynamicXmlCasting
 {
@@ -54,11 +58,23 @@ namespace DynamicXmlCasting
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            dynamic xmlDeserialized = ser.Deserialize<Customer>(xmlInputData);
-            xmlOutputData = ser.Serialize<Customer>(xmlDeserialized);
-            return xmlOutputData;
+            XDocument doc = XDocument.Parse(xmlInputData); //or XDocument.Load(path)
+            string jsonText = JsonConvert.SerializeXNode(doc);
+            dynamic dyn = JsonConvert.DeserializeObject<ExpandoObject>(jsonText);
+            // dynamic XmlObject = DynamicXml.Parse(xmlInputData);
+            Customer customerTest = dyn as Customer;
+            if(customerTest != null){
+                return customerTest; 
+            }
+            Person personTest = dyn as Person;
+            if(personTest!=null){
+                return personTest;
+            }
+            Address addressTest = dyn as Address;
+            if(addressTest!=null){
+                return addressTest;
+            }
+            return dyn;
         }
-        
     }
 }
