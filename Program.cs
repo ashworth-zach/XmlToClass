@@ -7,6 +7,7 @@ using System.Collections;
 using System.IO;
 using DynamicXmlCasting.Xml;
 using Newtonsoft.Json;
+using DynamicXmlCasting.Utilities;
 
 namespace DynamicXmlCasting
 {
@@ -16,9 +17,8 @@ namespace DynamicXmlCasting
         {
             // var xml = GetXml("address");
             dynamic xmlOutputData = CastXml();
-            Console.WriteLine(xmlOutputData);
         }
-        public static string GetXml(string testName){
+        public static dynamic GetXml(string testName){
             string xml="";
             switch (testName)
             {
@@ -40,40 +40,34 @@ namespace DynamicXmlCasting
             string xmlOutputData = string.Empty;
             Random random = new Random();
             int randomNumber=random.Next(1,3);
-
+            dynamic type;
             switch(randomNumber){
                 case 1:
                     //customer test
                     path = Directory.GetCurrentDirectory() + @".\TestStrings\Customer.xml";
                     xmlInputData = File.ReadAllText(path);
+
+                    type = new Customer();
                     break;
                 case 2:
                     //person test
                     xmlInputData = Testing.Tests.personTest;
+                    type = new Person();
                     break;
                 case 3:
                     //address test
                     xmlInputData = Testing.Tests.addressTest;
+                    type = new Address();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            XDocument doc = XDocument.Parse(xmlInputData); //or XDocument.Load(path)
-            string jsonText = JsonConvert.SerializeXNode(doc);
-            dynamic dyn = JsonConvert.DeserializeObject<ExpandoObject>(jsonText);
-            // dynamic XmlObject = DynamicXml.Parse(xmlInputData);
-            Customer customerTest = dyn as Customer;
-            if(customerTest != null){
-                return customerTest; 
-            }
-            Person personTest = dyn as Person;
-            if(personTest!=null){
-                return personTest;
-            }
-            Address addressTest = dyn as Address;
-            if(addressTest!=null){
-                return addressTest;
-            }
+            dynamic dyn = DynamicXml.XmlConvertToExpando(xmlInputData);
+
+            dynamic newObject = ExpandoHelper.ParseDictionary(dyn as ExpandoObject, type.GetType());
+
+            Console.WriteLine("Xml recieved is representing a: {0}", newObject.GetType());
+
             return dyn;
         }
     }

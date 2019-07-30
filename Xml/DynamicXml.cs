@@ -3,6 +3,8 @@ using System.Reflection;
 using System.Dynamic;
 using System.Xml.Linq;
 using System.Linq;
+using Newtonsoft.Json;
+
 namespace DynamicXmlCasting.Xml
 {
 
@@ -12,6 +14,13 @@ namespace DynamicXmlCasting.Xml
         private DynamicXml(XElement root)
         {
             _root = root;
+        }
+
+        public static ExpandoObject XmlConvertToExpando(string xml){
+            XDocument doc = XDocument.Parse(xml); //or XDocument.Load(path)
+            string jsonText = JsonConvert.SerializeXNode(doc);
+            dynamic dyn = JsonConvert.DeserializeObject<ExpandoObject>(jsonText);
+            return dyn;
         }
 
         public static DynamicXml Parse(string xmlString)
